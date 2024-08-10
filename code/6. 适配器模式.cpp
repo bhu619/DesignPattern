@@ -2,9 +2,9 @@
 
 using namespace std;
 
-// Ä¿±ê½Ó¿Ú: ¸ù¾İÓÃ»§ÊäÈëÑ¡Ôñ
-// ÊÊÅäÆ÷Àà
-// ±»ÊÊÅäÕß
+// ç›®æ ‡æ¥å£: æ ¹æ®ç”¨æˆ·è¾“å…¥é€‰æ‹©
+// é€‚é…å™¨ç±»
+// è¢«é€‚é…è€…
 
 class USB {
 public:
@@ -18,7 +18,7 @@ public:
 	virtual ~TypeC() {}
 };
 
-// ÊÊÅäÆ÷Àà: TypeC½Ó¿ÚÊÊÅäUSB³äµçÆ÷
+// é€‚é…å™¨ç±»: ä½¿ç”¨ USB æ¥å£
 class USBAdapter : public USB {
 public:
 	void chargeWithUSB() override {
@@ -26,15 +26,15 @@ public:
 	}
 };
 
-// ĞÂµçÄÔÀà£¬Ê¹ÓÃ TypeC ½Ó¿Ú
+// æ–°ç”µè„‘ç±»ï¼Œä½¿ç”¨ TypeC æ¥å£
 class NewComputer : public TypeC {
 private:
 	USBAdapter* adapter;
 
 public:
-	// ¹¹Ôìº¯ÊıÖĞ³õÊ¼»¯ adapter
+	// æ„é€ å‡½æ•°ä¸­åˆå§‹åŒ– adapter
 	NewComputer(USBAdapter* adapter) : adapter(adapter) {}
-	// C¿Ú³äµç
+	// Cå£å……ç”µ
 	void chargeWithTypeC() override
 	{
 		std::cout << "TypeC" << std::endl;
@@ -47,31 +47,21 @@ public:
 	~NewComputer() { delete adapter; }
 };
 
-
-
-// ÊÊÅäÆ÷³äµçÆ÷Àà£¬Ê¹ÓÃ USB ½Ó¿Ú
-class AdapterCharger : public USB {
-public:
-	void chargeWithUSB() override {
-		std::cout << "USB Adapter" << std::endl;
-	}
-};
-
 int main() {
-	int n; // ±íÊ¾ºóÃæÓĞN×é²âÊÔÊı¾İ¡£
+	int n; // è¡¨ç¤ºåé¢æœ‰Nç»„æµ‹è¯•æ•°æ®ã€‚
 	cin >> n;
 
-	int type; // ³äµçÀàĞÍ
+	int type; // å……ç”µç±»å‹
 	USBAdapter* newadapter = new USBAdapter();
 	NewComputer* computer = new NewComputer(newadapter);
 	while (n--) {
 		cin >> type;
 		if (type == 1) {
-			// 1±íÊ¾Ê¹ÓÃµçÄÔ±¾ÉíµÄTypeC½Ó¿Ú
+			// 1è¡¨ç¤ºä½¿ç”¨ç”µè„‘æœ¬èº«çš„TypeCæ¥å£
 			computer->chargeWithTypeC();
 		}
 		else if (type == 2) {
-			// 2±íÊ¾Ê¹ÓÃÀ©Õ¹ÎëµÄUSB½Ó¿Ú³äµç¡£
+			// 2è¡¨ç¤ºä½¿ç”¨æ‰©å±•åçš„USBæ¥å£å……ç”µã€‚
 			computer->chargeWithUSB();
 		}
 		else {
